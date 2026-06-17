@@ -132,7 +132,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <li>Registered Office</li>
               <li>Federal Republic of Nigeria</li>
               <li className="pt-2">info@primerigventures.com</li>
-              <li>procurement@primerigventures.com</li>
+              
             </ul>
           </div>
         </div>
