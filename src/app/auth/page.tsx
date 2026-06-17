@@ -42,7 +42,7 @@ export default function AuthPage() {
     <SiteLayout>
       <div className="container-prose flex min-h-[70vh] items-center justify-center py-16">
         <div className="w-full max-w-md rounded-md border border-border bg-card p-8 shadow-sm">
-          <h1 className="font-display text-2xl font-bold text-navy-deep">
+          <h1 className="font-display text-2xl font-bold text-brand-dark">
             {mode === "signin" ? "Admin Sign In" : "Create Admin Account"}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -71,18 +71,18 @@ export default function AuthPage() {
               />
             </div>
             {err && <p className="text-sm text-destructive">{err}</p>}
-            <button type="submit" disabled={busy} className="btn-navy w-full justify-center">
+            <button type="submit" disabled={busy} className="btn-brand-dark w-full justify-center">
               {busy ? "Working..." : mode === "signin" ? "Sign In" : "Sign Up"}
             </button>
           </form>
           <button
             onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            className="mt-4 text-sm text-muted-foreground hover:text-gold"
+            className="mt-4 text-sm text-muted-foreground hover:text-brand-red"
           >
             {mode === "signin" ? "Need an account? Sign up" : "Already have an account? Sign in"}
           </button>
           <div className="mt-6 text-center">
-            <Link href="/" className="text-xs text-muted-foreground hover:text-gold">← Back to site</Link>
+            <Link href="/" className="text-xs text-muted-foreground hover:text-brand-red">← Back to site</Link>
           </div>
         </div>
       </div>

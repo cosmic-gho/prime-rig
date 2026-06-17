@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Our Services — Energy, Telecom, Downstream & Procurement",
   description: "Four strategic divisions: Oil & Gas Exploration, Downstream Petroleum, Telecommunications Infrastructure, and Global Procurement.",
   openGraph: {
-    title: "Our Services — Prime Rig Ventures",
+    title: "Our Services — God's Energy International Ventures",
     description: "Four strategic business divisions delivering integrated industrial infrastructure.",
   },
 };
@@ -55,11 +55,11 @@ const blocks = [
 export default function Services() {
   return (
     <SiteLayout>
-      <section className="bg-navy-deep py-24 text-white">
+      <section className="bg-brand-dark py-24 text-white">
         <div className="container-prose">
           <span className="eyebrow">Our Services</span>
           <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold md:text-6xl">
-            Four strategic divisions delivering <span className="text-gold">end-to-end</span> industrial infrastructure.
+            Four strategic divisions delivering <span className="text-brand-red">end-to-end</span> industrial infrastructure.
           </h1>
           <p className="mt-8 max-w-2xl text-lg opacity-80">
             From offshore rigs and refineries to satellite uplinks and global supply chains — one accountable partner for every layer of execution.
@@ -79,21 +79,21 @@ export default function Services() {
               </div>
               <div className={i % 2 ? "lg:order-1" : ""}>
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center bg-gold">
-                    <b.icon className="h-7 w-7 text-navy-deep" />
+                  <div className="flex h-14 w-14 items-center justify-center bg-brand-red">
+                    <b.icon className="h-7 w-7 text-brand-dark" />
                   </div>
-                  <span className="text-xs uppercase tracking-[0.3em] text-gold">{b.eyebrow}</span>
+                  <span className="text-xs uppercase tracking-[0.3em] text-brand-red">{b.eyebrow}</span>
                 </div>
-                <h2 className="mt-6 font-display text-4xl font-bold text-navy-deep">{b.title}</h2>
+                <h2 className="mt-6 font-display text-4xl font-bold text-brand-dark">{b.title}</h2>
                 <div className="mt-8 space-y-6">
                   {b.caps.map((c) => (
-                    <div key={c.t} className="border-l-2 border-gold pl-5">
-                      <h3 className="font-display text-xl font-semibold text-navy-deep">{c.t}</h3>
+                    <div key={c.t} className="border-l-2 border-brand-red pl-5">
+                      <h3 className="font-display text-xl font-semibold text-brand-dark">{c.t}</h3>
                       <p className="mt-2 leading-relaxed text-muted-foreground">{c.d}</p>
                     </div>
                   ))}
                 </div>
-                <Link href="/contact" className="btn-navy mt-10">
+                <Link href="/contact" className="btn-brand-dark mt-10">
                   Discuss This Division <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

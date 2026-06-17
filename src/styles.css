@@ -27,27 +27,27 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-gold: var(--gold);
-  --color-gold-foreground: var(--gold-foreground);
-  --color-navy: var(--navy);
-  --color-navy-deep: var(--navy-deep);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-foreground: var(--brand-red-foreground);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-dark: var(--brand-dark);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --shadow-gold: 0 10px 40px -10px oklch(0.78 0.15 85 / 0.35);
+  --shadow-brand-red: 0 10px 40px -10px oklch(0.62 0.18 29 / 0.35);
   --shadow-deep: 0 30px 60px -20px oklch(0.1 0.05 260 / 0.5);
 }
 
 :root {
   --radius: 0.375rem;
 
-  --navy-deep: oklch(0.18 0.05 260);
-  --navy: oklch(0.26 0.06 258);
-  --gold: oklch(0.78 0.13 85);
-  --gold-foreground: oklch(0.18 0.05 260);
+  --brand-dark: oklch(0.20 0.02 240);
+  --brand-blue: oklch(0.68 0.12 240);
+  --brand-red: oklch(0.62 0.18 29);
+  --brand-red-foreground: oklch(0.98 0.005 90);
 
   --background: oklch(0.98 0.005 90);
   --foreground: oklch(0.18 0.05 260);
@@ -100,33 +100,33 @@
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-brand-red);
   }
   .eyebrow::before {
     content: "";
     width: 1.5rem;
     height: 1px;
-    background: var(--color-gold);
+    background: var(--color-brand-red);
   }
-  .btn-gold {
+  .btn-brand-red {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: var(--color-gold);
-    color: var(--color-gold-foreground);
+    background: var(--color-brand-red);
+    color: var(--color-brand-red-foreground);
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    border: 1px solid var(--color-gold);
+    border: 1px solid var(--color-brand-red);
   }
-  .btn-gold:hover {
+  .btn-brand-red:hover {
     background: transparent;
-    color: var(--color-gold);
-    box-shadow: var(--shadow-gold);
+    color: var(--color-brand-red);
+    box-shadow: var(--shadow-brand-red);
   }
   .btn-outline-light {
     display: inline-flex;
@@ -144,26 +144,26 @@
   }
   .btn-outline-light:hover {
     background: white;
-    color: var(--color-navy-deep);
+    color: var(--color-brand-dark);
   }
-  .btn-navy {
+  .btn-brand-dark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: var(--color-navy-deep);
+    background: var(--color-brand-dark);
     color: white;
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    border: 1px solid var(--color-navy-deep);
+    border: 1px solid var(--color-brand-dark);
   }
-  .btn-navy:hover {
-    background: var(--color-gold);
-    color: var(--color-gold-foreground);
-    border-color: var(--color-gold);
+  .btn-brand-dark:hover {
+    background: var(--color-brand-red);
+    color: var(--color-brand-red-foreground);
+    border-color: var(--color-brand-red);
   }
 }

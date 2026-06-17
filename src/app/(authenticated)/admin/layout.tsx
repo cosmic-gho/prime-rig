@@ -36,14 +36,14 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
     return (
       <SiteLayout>
         <div className="container-prose py-20 text-center">
-          <h1 className="font-display text-2xl font-bold text-navy-deep">Not Authorized</h1>
+          <h1 className="font-display text-2xl font-bold text-brand-dark">Not Authorized</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Your account ({user?.email}) does not have admin access.
           </p>
           <p className="mt-4 text-xs text-muted-foreground">
             To grant admin: open the Backend → Database → user_roles table and insert a row with your user id and role <code>admin</code>.
           </p>
-          <button onClick={signOut} className="btn-navy mt-6">Sign Out</button>
+          <button onClick={signOut} className="btn-brand-dark mt-6">Sign Out</button>
         </div>
       </SiteLayout>
     );
@@ -59,10 +59,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <div className="border-b border-border bg-card">
         <div className="container-prose flex items-center justify-between py-6">
           <div>
-            <h1 className="font-display text-2xl font-bold text-navy-deep">Admin Dashboard</h1>
+            <h1 className="font-display text-2xl font-bold text-brand-dark">Admin Dashboard</h1>
             <p className="text-xs text-muted-foreground">Signed in as {user?.email}</p>
           </div>
-          <button onClick={signOut} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gold">
+          <button onClick={signOut} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-brand-red">
             <LogOut className="h-4 w-4" /> Sign out
           </button>
         </div>
@@ -75,7 +75,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 key={t.to}
                 href={t.to}
                 className={`flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium ${
-                  active ? "border-gold text-navy-deep" : "border-transparent text-muted-foreground hover:text-foreground"
+                  active ? "border-brand-red text-brand-dark" : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon className="h-4 w-4" /> {t.label}

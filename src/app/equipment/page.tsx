@@ -35,7 +35,7 @@ export default function Equipment() {
 
   return (
     <SiteLayout>
-      <section className="bg-navy-deep py-20 text-white">
+      <section className="bg-brand-dark py-20 text-white">
         <div className="container-prose">
           <span className="eyebrow">Equipment Catalog</span>
           <h1 className="mt-6 font-display text-5xl font-bold md:text-6xl">Procurement Portal</h1>
@@ -48,7 +48,7 @@ export default function Equipment() {
               placeholder="Search equipment — e.g. Satellite, Drill Bit, Radio..."
               className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground"
             />
-            <button className="btn-navy">Search</button>
+            <button className="btn-brand-dark">Search</button>
           </div>
         </div>
       </section>
@@ -57,12 +57,12 @@ export default function Equipment() {
         <div className="container-prose grid gap-10 lg:grid-cols-[260px_1fr]">
           <aside className="space-y-8">
             <div>
-              <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Filter by Category</h3>
+              <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Filter by Category</h3>
               <div className="space-y-3">
                 {["Energy", "Telecom", "Commodities"].map((c) => (
                   <label key={c} className="flex cursor-pointer items-center gap-3 text-sm">
                     <input type="checkbox" checked={cats.includes(c)} onChange={() => toggle(cats, setCats, c)}
-                      className="h-4 w-4 accent-[color:var(--gold)]" />
+                      className="h-4 w-4 accent-[color:var(--brand-red)]" />
                     {c === "Energy" && "Oilfield & Production Tools"}
                     {c === "Telecom" && "Telecom Hardware & Gadgets"}
                     {c === "Commodities" && "Industrial Commodities"}
@@ -71,12 +71,12 @@ export default function Equipment() {
               </div>
             </div>
             <div>
-              <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Filter by Availability</h3>
+              <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Filter by Availability</h3>
               <div className="space-y-3">
                 {["In Stock", "Available for Lease"].map((c) => (
                   <label key={c} className="flex cursor-pointer items-center gap-3 text-sm">
                     <input type="checkbox" checked={avails.includes(c)} onChange={() => toggle(avails, setAvails, c)}
-                      className="h-4 w-4 accent-[color:var(--gold)]" />
+                      className="h-4 w-4 accent-[color:var(--brand-red)]" />
                     {c}
                   </label>
                 ))}
@@ -89,25 +89,25 @@ export default function Equipment() {
               <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
                 Displaying {filtered.length} of {items.length} items
               </p>
-              <span className="text-xs uppercase tracking-[0.25em] text-gold">Compliance Verified</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-brand-red">Compliance Verified</span>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {filtered.map((item) => (
                 <article key={item.id} className="group flex flex-col border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
-                  <div className="relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-navy-deep to-navy">
-                    <span className="font-display text-6xl font-bold text-gold/30">{item.cat[0]}</span>
-                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 bg-gold px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-navy-deep">
+                  <div className="relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-brand-dark to-brand-blue">
+                    <span className="font-display text-6xl font-bold text-brand-red/30">{item.cat[0]}</span>
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 bg-brand-red px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-dark">
                       <BadgeCheck className="h-3 w-3" /> Verified
                     </span>
-                    <span className="absolute bottom-3 left-3 bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-navy-deep">{item.avail}</span>
+                    <span className="absolute bottom-3 left-3 bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-dark">{item.avail}</span>
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-gold">{item.cat}</p>
-                    <h3 className="mt-2 font-display text-xl font-bold text-navy-deep">{item.name}</h3>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-brand-red">{item.cat}</p>
+                    <h3 className="mt-2 font-display text-xl font-bold text-brand-dark">{item.name}</h3>
                     <p className="mt-1 text-xs text-muted-foreground">Part #: {item.part}</p>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-                    <Link href="/contact" className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-xs font-semibold uppercase tracking-widest text-navy-deep transition-colors group-hover:text-gold">
+                    <Link href="/contact" className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-xs font-semibold uppercase tracking-widest text-brand-dark transition-colors group-hover:text-brand-red">
                       Request Quote <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>

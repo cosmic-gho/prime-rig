@@ -71,7 +71,7 @@ export default function ProductsAdmin() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_2fr]">
       <div>
-        <h2 className="font-display text-xl font-semibold text-navy-deep">Add Product</h2>
+        <h2 className="font-display text-xl font-semibold text-brand-dark">Add Product</h2>
         <form onSubmit={submit} className="mt-4 space-y-3 rounded-md border border-border bg-card p-5">
           <Field label="Name">
             <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inp} />
@@ -92,21 +92,21 @@ export default function ProductsAdmin() {
             <textarea rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={inp} />
           </Field>
           <Field label="Image">
-            <label className="mt-1 flex cursor-pointer items-center gap-2 rounded border border-dashed border-input bg-background px-3 py-3 text-sm hover:border-gold">
+            <label className="mt-1 flex cursor-pointer items-center gap-2 rounded border border-dashed border-input bg-background px-3 py-3 text-sm hover:border-brand-red">
               <Upload className="h-4 w-4 text-muted-foreground" />
               <span className="text-muted-foreground">{file ? file.name : "Click to upload"}</span>
               <input id="file-input" type="file" accept="image/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
             </label>
           </Field>
           {err && <p className="text-sm text-destructive">{err}</p>}
-          <button disabled={busy || categories.length === 0} className="btn-navy w-full justify-center">
+          <button disabled={busy || categories.length === 0} className="btn-brand-dark w-full justify-center">
             <Plus className="h-4 w-4" /> {busy ? "Saving..." : "Add Product"}
           </button>
         </form>
       </div>
 
       <div>
-        <h2 className="font-display text-xl font-semibold text-navy-deep">Products ({products.length})</h2>
+        <h2 className="font-display text-xl font-semibold text-brand-dark">Products ({products.length})</h2>
         <div className="mt-4 space-y-3">
           {products.length === 0 ? (
             <p className="rounded-md border border-border bg-card p-6 text-sm text-muted-foreground">No products yet.</p>

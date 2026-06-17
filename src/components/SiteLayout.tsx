@@ -22,11 +22,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Top bar */}
-      <div className="hidden bg-navy-deep text-[color:oklch(0.85_0.02_85)] md:block">
+      <div className="hidden bg-brand-dark text-[color:oklch(0.85_0.02_85)] md:block">
         <div className="container-prose flex h-9 items-center justify-between text-xs">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2"><Phone className="h-3 w-3 text-gold" /> +234 (0) 800 PRIME RIG</span>
-            <span className="flex items-center gap-2"><Mail className="h-3 w-3 text-gold" /> info@primerigventures.com</span>
+            <span className="flex items-center gap-2"><Phone className="h-3 w-3 text-brand-red" /> +234 (0) 800 GODS ENERGY</span>
+            <span className="flex items-center gap-2"><Mail className="h-3 w-3 text-brand-red" /> info@primerigventures.com</span>
           </div>
           <span className="tracking-wider">CAC Certified · 14 July 2025</span>
         </div>
@@ -36,11 +36,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
         <div className="container-prose flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center bg-navy-deep">
-              <span className="font-display text-xl font-bold text-gold">P</span>
-            </div>
+            <img src="/logo.png" alt="God's Energy Logo" className="h-10 w-auto object-contain" />
             <div className="leading-tight">
-              <div className="font-display text-lg font-bold text-navy-deep">Prime Rig Ventures</div>
+              <div className="font-display text-lg font-bold text-brand-dark">God's Energy International Ventures</div>
               <div className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Limited · Nigeria</div>
             </div>
           </Link>
@@ -52,7 +50,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={l.to}
                   href={l.to}
-                  className={`text-sm font-medium uppercase tracking-wider transition-colors ${active ? "text-gold" : "text-foreground hover:text-gold"}`}
+                  className={`text-sm font-medium uppercase tracking-wider transition-colors ${active ? "text-brand-red" : "text-foreground hover:text-brand-red"}`}
                 >
                   {l.label}
                 </Link>
@@ -60,7 +58,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             })}
           </nav>
 
-          <Link href="/contact" className="btn-navy hidden lg:inline-flex">
+          <Link href="/contact" className="btn-brand-dark hidden lg:inline-flex">
             Request RFQ <ChevronRight className="h-4 w-4" />
           </Link>
 
@@ -82,7 +80,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                   {l.label}
                 </Link>
               ))}
-              <Link href="/contact" onClick={() => setOpen(false)} className="btn-navy mt-4">
+              <Link href="/contact" onClick={() => setOpen(false)} className="btn-brand-dark mt-4">
                 Request RFQ
               </Link>
             </div>
@@ -93,16 +91,14 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-navy-deep text-[color:oklch(0.85_0.02_85)]">
+      <footer className="bg-brand-dark text-[color:oklch(0.85_0.02_85)]">
         <div className="container-prose grid gap-12 py-16 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center bg-gold">
-                <span className="font-display text-xl font-bold text-navy-deep">P</span>
-              </div>
+                <img src="/logo.png" alt="God's Energy Logo" className="h-12 w-auto object-contain brightness-0 invert" />
               <div className="leading-tight">
-                <div className="font-display text-lg font-bold text-white">Prime Rig Ventures</div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-gold">Limited</div>
+                <div className="font-display text-lg font-bold text-white">God's Energy International Ventures</div>
+                <div className="text-[10px] uppercase tracking-[0.25em] text-brand-red">Limited</div>
               </div>
             </div>
             <p className="mt-6 text-sm leading-relaxed opacity-80">
@@ -110,15 +106,15 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </p>
           </div>
           <div>
-            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Navigate</h4>
+            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Navigate</h4>
             <ul className="space-y-2 text-sm">
               {navLinks.map((l) => (
-                <li key={l.to}><Link href={l.to} className="opacity-80 hover:text-gold hover:opacity-100">{l.label}</Link></li>
+                <li key={l.to}><Link href={l.to} className="opacity-80 hover:text-brand-red hover:opacity-100">{l.label}</Link></li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Divisions</h4>
+            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Divisions</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li>Energy & Petroleum</li>
               <li>Downstream Marketing</li>
@@ -127,7 +123,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </ul>
           </div>
           <div>
-            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-gold">Contact</h4>
+            <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Contact</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li>Registered Office</li>
               <li>Federal Republic of Nigeria</li>
@@ -138,7 +134,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </div>
         <div className="border-t border-white/10">
           <div className="container-prose flex flex-col items-center justify-between gap-3 py-6 text-xs opacity-70 md:flex-row">
-            <span>© 2026 Prime Rig Ventures Limited. All Rights Reserved.</span>
+            <span>© 2026 God's Energy International Ventures Limited. All Rights Reserved.</span>
             <span>CAC Certified (14 July 2025) · Electronic Stamp Duty Verified</span>
           </div>
         </div>

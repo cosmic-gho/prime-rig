@@ -44,7 +44,7 @@ export default function ProductsPage() {
 
   return (
     <SiteLayout>
-      <section className="border-b border-border bg-navy-deep py-16 text-white">
+      <section className="border-b border-border bg-brand-dark py-16 text-white">
         <div className="container-prose">
           <h1 className="font-display text-4xl font-bold md:text-5xl">Product Catalog</h1>
           <p className="mt-3 max-w-2xl text-sm opacity-80">
@@ -85,7 +85,7 @@ export default function ProductsPage() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="py-24 text-center">
-            <p className="font-display text-xl text-navy-deep">No products found</p>
+            <p className="font-display text-xl text-brand-dark">No products found</p>
             <p className="mt-2 text-sm text-muted-foreground">Try a different search or filter.</p>
           </div>
         ) : (
@@ -106,8 +106,8 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
       onClick={onClick}
       className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition ${
         active
-          ? "border-navy-deep bg-navy-deep text-white"
-          : "border-border bg-card text-foreground hover:border-gold hover:text-gold"
+          ? "border-brand-dark bg-brand-dark text-white"
+          : "border-border bg-card text-foreground hover:border-brand-red hover:text-brand-red"
       }`}
     >
       {children}
@@ -117,7 +117,7 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
 
 function ProductCard({ product, category }: { product: Product; category?: Category }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-card transition hover:shadow-[var(--shadow-gold)]">
+    <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-card transition hover:shadow-[var(--shadow-brand-red)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         {product.image_url ? (
           <Image
@@ -131,18 +131,18 @@ function ProductCard({ product, category }: { product: Product; category?: Categ
           <div className="flex h-full items-center justify-center text-xs text-muted-foreground">No image</div>
         )}
         {category && (
-          <span className="absolute left-3 top-3 rounded-full bg-navy-deep/90 px-2.5 py-1 text-[10px] uppercase tracking-wider text-gold">
+          <span className="absolute left-3 top-3 rounded-full bg-brand-dark/90 px-2.5 py-1 text-[10px] uppercase tracking-wider text-brand-red">
             {category.name}
           </span>
         )}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-lg font-semibold text-navy-deep">{product.name}</h3>
+        <h3 className="font-display text-lg font-semibold text-brand-dark">{product.name}</h3>
         {product.description && (
           <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{product.description}</p>
         )}
         <div className="mt-auto flex items-end justify-between pt-4">
-          <span className="font-display text-2xl font-bold text-navy-deep">
+          <span className="font-display text-2xl font-bold text-brand-dark">
             ${Number(product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </span>
         </div>

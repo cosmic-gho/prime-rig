@@ -43,7 +43,7 @@ export default function CategoriesAdmin() {
   return (
     <div className="grid gap-8 md:grid-cols-[1fr_2fr]">
       <div>
-        <h2 className="font-display text-xl font-semibold text-navy-deep">Add Category</h2>
+        <h2 className="font-display text-xl font-semibold text-brand-dark">Add Category</h2>
         <form onSubmit={add} className="mt-4 space-y-3 rounded-md border border-border bg-card p-5">
           <div>
             <label className="text-xs uppercase tracking-wider text-muted-foreground">Name</label>
@@ -56,14 +56,14 @@ export default function CategoriesAdmin() {
             />
           </div>
           {err && <p className="text-sm text-destructive">{err}</p>}
-          <button disabled={busy || !name.trim()} className="btn-navy w-full justify-center">
+          <button disabled={busy || !name.trim()} className="btn-brand-dark w-full justify-center">
             <Plus className="h-4 w-4" /> {busy ? "Adding..." : "Add Category"}
           </button>
         </form>
       </div>
 
       <div>
-        <h2 className="font-display text-xl font-semibold text-navy-deep">Categories ({items.length})</h2>
+        <h2 className="font-display text-xl font-semibold text-brand-dark">Categories ({items.length})</h2>
         <div className="mt-4 overflow-hidden rounded-md border border-border bg-card">
           {items.length === 0 ? (
             <p className="p-6 text-sm text-muted-foreground">No categories yet.</p>
