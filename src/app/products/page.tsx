@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, BadgeCheck, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "@/components/SiteLayout";
 import Image from "next/image";
+import Link from "next/link";
 
 type Category = { id: string; name: string; slug: string };
 type Product = {
@@ -21,7 +22,7 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState<string>("all");
+  const [cats, setCats] = useState<string[]>([]);
 
   useEffect(() => {
     Promise.all([
@@ -36,115 +37,133 @@ export default function ProductsPage() {
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      if (cat !== "all" && p.category_id !== cat) return false;
-      if (q && !p.name.toLowerCase().includes(q.toLowerCase())) return false;
+      if (cats.length && p.category_id && !cats.includes(p.category_id)) return false;
+      if (q && !`${p.name} ${p.description}`.toLowerCase().includes(q.toLowerCase())) return false;
       return true;
     });
-  }, [products, q, cat]);
+  }, [products, q, cats]);
+
+  const toggleCat = (id: string) =>
+    setCats((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   return (
     <SiteLayout>
-      <section className="border-b border-border bg-brand-dark py-16 text-white">
+      <section className="bg-brand-dark py-20 text-white">
         <div className="container-prose">
-          <h1 className="font-display text-4xl font-bold md:text-5xl">Product Catalog</h1>
-          <p className="mt-3 max-w-2xl text-sm opacity-80">
-            Explore our complete inventory. Use search and filters to find what you need.
+          <span className="eyebrow">Product Catalog</span>
+          <h1 className="mt-6 font-display text-5xl font-bold md:text-6xl">Industrial Procurement</h1>
+          <p className="mt-4 max-w-2xl text-lg opacity-80">
+            Explore our complete inventory. Every product includes compliance checks and direct quoting.
           </p>
-        </div>
-      </section>
 
-      <section className="border-b border-border bg-background py-6">
-        <div className="container-prose flex flex-col gap-4 md:flex-row md:items-center">
-          <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <div className="mt-10 flex items-center gap-3 bg-white p-2 shadow-2xl">
+            <Search className="ml-4 h-5 w-5 text-muted-foreground" />
             <input
-              type="search"
-              placeholder="Search products by name..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              className="w-full rounded border border-input bg-card py-2.5 pl-10 pr-3 text-sm"
+              placeholder="Search products by name or description..."
+              className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground"
             />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <FilterChip active={cat === "all"} onClick={() => setCat("all")}>All</FilterChip>
-            {categories.map((c) => (
-              <FilterChip key={c.id} active={cat === c.id} onClick={() => setCat(c.id)}>
-                {c.name}
-              </FilterChip>
-            ))}
+            <button className="btn-brand-dark">Search</button>
           </div>
         </div>
       </section>
 
-      <section className="container-prose py-12">
-        {loading ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[4/5] animate-pulse rounded-md bg-muted" />
-            ))}
+      <section className="bg-background py-16">
+        <div className="container-prose grid gap-10 lg:grid-cols-[260px_1fr]">
+          <aside className="space-y-8">
+            <div>
+              <h3 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Filter by Category</h3>
+              <div className="space-y-3">
+                {categories.map((c) => (
+                  <label key={c.id} className="flex cursor-pointer items-center gap-3 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={cats.includes(c.id)}
+                      onChange={() => toggleCat(c.id)}
+                      className="h-4 w-4 accent-[color:var(--brand-red)]"
+                    />
+                    {c.name}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div>
+            <div className="mb-6 flex items-center justify-between border-b border-border pb-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                Displaying {filtered.length} of {products.length} items
+              </p>
+              <span className="text-xs uppercase tracking-[0.25em] text-brand-red">Compliance Verified</span>
+            </div>
+
+            {loading ? (
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="aspect-[4/3] animate-pulse border border-border bg-muted" />
+                ))}
+              </div>
+            ) : filtered.length === 0 ? (
+              <div className="border border-dashed border-border bg-secondary p-12 text-center">
+                <p className="text-muted-foreground">No products match your filters.</p>
+              </div>
+            ) : (
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {filtered.map((p) => (
+                  <ProductCard key={p.id} product={p} category={categories.find((c) => c.id === p.category_id)} />
+                ))}
+              </div>
+            )}
           </div>
-        ) : filtered.length === 0 ? (
-          <div className="py-24 text-center">
-            <p className="font-display text-xl text-brand-dark">No products found</p>
-            <p className="mt-2 text-sm text-muted-foreground">Try a different search or filter.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((p) => (
-              <ProductCard key={p.id} product={p} category={categories.find((c) => c.id === p.category_id)} />
-            ))}
-          </div>
-        )}
+        </div>
       </section>
     </SiteLayout>
   );
 }
 
-function FilterChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition ${
-        active
-          ? "border-brand-dark bg-brand-dark text-white"
-          : "border-border bg-card text-foreground hover:border-brand-red hover:text-brand-red"
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
 function ProductCard({ product, category }: { product: Product; category?: Category }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-card transition hover:shadow-[var(--shadow-brand-red)]">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+    <article className="group flex flex-col border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-xl">
+      <div className="relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-brand-dark to-brand-blue overflow-hidden">
         {product.image_url ? (
           <Image
             src={product.image_url}
             alt={product.name}
             width={400}
             height={300}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-xs text-muted-foreground">No image</div>
-        )}
-        {category && (
-          <span className="absolute left-3 top-3 rounded-full bg-brand-dark/90 px-2.5 py-1 text-[10px] uppercase tracking-wider text-brand-red">
-            {category.name}
+          <span className="font-display text-6xl font-bold text-brand-red/30">
+            {category?.name?.[0] || product.name[0]}
           </span>
         )}
+        <span className="absolute right-3 top-3 inline-flex items-center gap-1 bg-brand-red px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-dark">
+          <BadgeCheck className="h-3 w-3" /> Verified
+        </span>
+        <span className="absolute bottom-3 left-3 bg-white/95 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-dark">
+          In Stock
+        </span>
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-lg font-semibold text-brand-dark">{product.name}</h3>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-brand-red">{category?.name || "Uncategorized"}</p>
+        <h3 className="mt-2 font-display text-xl font-bold text-brand-dark">{product.name}</h3>
         {product.description && (
-          <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{product.description}</p>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+            {product.description}
+          </p>
         )}
-        <div className="mt-auto flex items-end justify-between pt-4">
+        <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
           <span className="font-display text-2xl font-bold text-brand-dark">
             ${Number(product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </span>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-dark transition-colors group-hover:text-brand-red"
+          >
+            Request Quote <ArrowRight className="h-3 w-3" />
+          </Link>
         </div>
       </div>
     </article>

@@ -1,11 +1,45 @@
 "use client";
 
 import { SiteLayout } from "@/components/SiteLayout";
-import { MapPin, Phone, Mail, Upload, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Upload, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      if (file) {
+        formData.append("file", file);
+      }
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit inquiry.");
+      }
+
+      setSubmitted(true);
+      toast.success("Inquiry sent successfully!");
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "An error occurred while sending your inquiry.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SiteLayout>
@@ -28,7 +62,7 @@ export default function Contact() {
                 {[
                   { i: MapPin, t: "Registered Office", l: ["Federal Republic of Nigeria", "Primary Operations Office"] },
                   { i: Phone, t: "Direct Desks", l: ["Upstream & Energy Support", "Telecom & Infrastructure", "Global Logistics"] },
-                  { i: Mail, t: "Corporate Email", l: ["info@primerigventures.com", "procurement@primerigventures.com"] },
+                  { i: Mail, t: "Corporate Email", l: ["info@credixvault.live", "procurement@credixvault.live"] },
                 ].map((c) => (
                   <div key={c.t} className="flex gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-brand-dark text-brand-red">
@@ -65,7 +99,7 @@ export default function Contact() {
                 <p className="mt-2 text-muted-foreground">Our division desk will respond within one business day.</p>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="mt-8 space-y-5">
+              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Field label="Full Name" name="name" />
                   <Field label="Company Name" name="company" />
@@ -75,33 +109,53 @@ export default function Contact() {
 
                 <div>
                   <label className="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-brand-dark">Department</label>
-                  <select required className="w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-brand-red">
+                  <select required name="department" className="w-full border border-input bg-background px-4 py-3 text-sm outline-none focus:border-brand-red">
                     <option value="">Select Department...</option>
-                    <option>Oilfield Engineering & Refinery Repairs</option>
-                    <option>Bulk Petroleum Procurement & Filling Stations</option>
-                    <option>Telecommunications & Satellite Deployment</option>
-                    <option>Equipment Procurement & General Contracts</option>
+                    <option value="Oilfield Engineering & Refinery Repairs">Oilfield Engineering & Refinery Repairs</option>
+                    <option value="Bulk Petroleum Procurement & Filling Stations">Bulk Petroleum Procurement & Filling Stations</option>
+                    <option value="Telecommunications & Satellite Deployment">Telecommunications & Satellite Deployment</option>
+                    <option value="Equipment Procurement & General Contracts">Equipment Procurement & General Contracts</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-brand-dark">Project Description</label>
-                  <textarea required rows={5}
+                  <textarea required name="description" rows={5}
                     placeholder="Describe your project or required equipment specifications..."
                     className="w-full resize-none border border-input bg-background px-4 py-3 text-sm outline-none focus:border-brand-red" />
                 </div>
 
-                <label className="flex cursor-pointer items-center gap-3 border-2 border-dashed border-border bg-secondary p-6 transition-colors hover:border-brand-red">
-                  <Upload className="h-5 w-5 text-brand-red" />
+                <label className={`flex cursor-pointer items-center gap-3 border-2 border-dashed bg-secondary p-6 transition-colors ${file ? 'border-brand-dark' : 'border-border hover:border-brand-red'}`}>
+                  <Upload className={`h-5 w-5 ${file ? 'text-brand-dark' : 'text-brand-red'}`} />
                   <div className="text-sm">
-                    <div className="font-semibold text-brand-dark">Drag & drop RFQ document</div>
-                    <div className="text-xs text-muted-foreground">PDF, Word — technical specifications welcome</div>
+                    <div className="font-semibold text-brand-dark">
+                      {file ? file.name : "Drag & drop RFQ document or click to browse"}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {file ? `${(file.size / 1024 / 1024).toFixed(2)} MB` : "PDF, Word — technical specifications welcome (Max 5MB)"}
+                    </div>
                   </div>
-                  <input type="file" className="hidden" />
+                  <input 
+                    type="file" 
+                    className="hidden" 
+                    onChange={(e) => {
+                      if (e.target.files && e.target.files[0]) {
+                        if (e.target.files[0].size > 5 * 1024 * 1024) {
+                          toast.error("File is too large. Maximum size is 5MB.");
+                          return;
+                        }
+                        setFile(e.target.files[0]);
+                      }
+                    }} 
+                  />
                 </label>
 
-                <button type="submit" className="btn-brand-dark w-full">
-                  Submit Official Inquiry <Send className="h-4 w-4" />
+                <button disabled={loading} type="submit" className="btn-brand-dark w-full disabled:opacity-70">
+                  {loading ? (
+                    <>Sending Inquiry <Loader2 className="h-4 w-4 animate-spin" /></>
+                  ) : (
+                    <>Submit Official Inquiry <Send className="h-4 w-4" /></>
+                  )}
                 </button>
               </form>
             )}

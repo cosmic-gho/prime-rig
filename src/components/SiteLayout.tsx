@@ -10,7 +10,7 @@ const navLinks = [
   { to: "/about", label: "Who We Are" },
   { to: "/services", label: "Our Services" },
   { to: "/products", label: "Products" },
-  { to: "/equipment", label: "Equipment Catalog" },
+  { to: "/products", label: "Equipment Catalog" },
   { to: "/hseq", label: "HSEQ" },
   { to: "/contact", label: "Contact" },
 ];
