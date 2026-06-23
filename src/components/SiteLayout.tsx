@@ -126,7 +126,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <h4 className="mb-4 text-xs uppercase tracking-[0.25em] text-brand-red">Contact</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li>Registered Office</li>
-              <li>Federal Republic of Nigeria</li>
+              <li>52b airport road Benin city Edo state.</li>
               <li className="pt-2">info@primerigventures.com</li>
               
             </ul>

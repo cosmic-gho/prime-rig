@@ -60,7 +60,7 @@ export default function Contact() {
               <h2 className="font-display text-2xl font-bold text-brand-dark">Corporate Contact Points</h2>
               <div className="mt-6 space-y-6">
                 {[
-                  { i: MapPin, t: "Registered Office", l: ["Federal Republic of Nigeria", "Primary Operations Office"] },
+                  { i: MapPin, t: "Registered Office", l: ["52b airport road Benin city Edo state.", "Primary Operations Office"] },
                   { i: Phone, t: "Direct Desks", l: ["Upstream & Energy Support", "Telecom & Infrastructure", "Global Logistics"] },
                   { i: Mail, t: "Corporate Email", l: ["info@credixvault.live", "procurement@credixvault.live"] },
                 ].map((c) => (
