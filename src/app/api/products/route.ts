@@ -17,7 +17,7 @@ export async function GET() {
     // Fetch products from the Supabase database
     const { data: products, error } = await supabase
       .from('products')
-      .select('*')
+      .select('*, categories(name)')
       .order('created_at', { ascending: false });
 
     if (error) {
