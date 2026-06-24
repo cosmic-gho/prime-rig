@@ -61,8 +61,8 @@ export default function Contact() {
               <div className="mt-6 space-y-6">
                 {[
                   { i: MapPin, t: "Registered Office", l: ["52b airport road Benin city Edo state.", "Primary Operations Office"] },
-                  { i: Phone, t: "Direct Desks", l: ["Upstream & Energy Support", "Telecom & Infrastructure", "Global Logistics"] },
-                  { i: Mail, t: "Corporate Email", l: ["info@credixvault.live", "procurement@credixvault.live"] },
+                  { i: Phone, t: "Direct Desks", l: ["+234 8035658402"] },
+                  { i: Mail, t: "Corporate Email", l: [] },
                 ].map((c) => (
                   <div key={c.t} className="flex gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-brand-dark text-brand-red">

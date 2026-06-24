@@ -127,7 +127,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <ul className="space-y-2 text-sm opacity-80">
               <li>Registered Office</li>
               <li>52b airport road Benin city Edo state.</li>
-              <li className="pt-2">info@primerigventures.com</li>
+              {/* <li className="pt-2">info@primerigventures.com</li> */}
               
             </ul>
           </div>
@@ -135,7 +135,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <div className="border-t border-white/10">
           <div className="container-prose flex flex-col items-center justify-between gap-3 py-6 text-xs opacity-70 md:flex-row">
             <span>© 2026 God's Energy International Ventures Limited. All Rights Reserved.</span>
-            <span>CAC Certified (14 July 2025) · Electronic Stamp Duty Verified</span>
+            {/* <span>CAC Certified (14 July 2025) · Electronic Stamp Duty Verified</span> */}
           </div>
         </div>
       </footer>
