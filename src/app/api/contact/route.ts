@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: `"${name}" <${process.env.DEFAULT_FROM_EMAIL}>`, // Hostinger might require the 'from' to match the authenticated user
       replyTo: email,
-      to: process.env.SERVER_EMAIL,
+      to: process.env.ADMIN_EMAIL,
       subject: `New RFQ Inquiry: ${department} - ${company || name}`,
       text: `
 You have received a new Official Inquiry via the website.
